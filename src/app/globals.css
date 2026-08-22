@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-base: #070a12;
+  --color-surface: #0e1422;
+  --color-surface-2: #141c2e;
+  --color-line: #1e293b;
+  --color-text: #e2e8f5;
+  --color-muted: #94a3b8;
+
+  /* 魔法（ファンタジー）側のアクセント */
+  --color-magic: #22d3ee;
+  --color-arcane: #a855f7;
+  /* 銃（科学）側のアクセント */
+  --color-gun: #f97316;
+  --color-copper: #b45309;
+
+  --font-sans: var(--font-noto-sans-jp), system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-magic) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-magic);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# chirogen-web
 
-## Getting Started
+[Chirogen](https://github.com/2chiro/chirogen) Minecraft サーバの公式サイト。
 
-First, run the development server:
+- 公開先（予定）: https://www.chirogen.net
+- ゲームサーバ: `mc.chirogen.net`（Minecraft Java Edition 26.1.2）
+
+## 技術スタック
+
+- Next.js 16（App Router / Turbopack）+ TypeScript
+- Tailwind CSS v4（`src/app/globals.css` の `@theme` に配色を定義）
+- MDX（`next-mdx-remote` + `gray-matter`）でお知らせを管理
+
+## 開発
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ディレクトリ
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+content/news/*.mdx    お知らせ記事（frontmatter: title, date, category, summary, draft）
+src/app/              ルーティング（/, /join, /features, /rules, /news, /legal/*）
+src/components/       共通 UI（ヘッダー・フッター・サーバアドレスコピーなど）
+src/lib/site.ts       サーバアドレス・バージョン・Discord URL などのサイト定数
+src/lib/news.ts       お知らせの読み込み（draft は本番ビルドで除外）
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 公開状況の切り替え
 
-## Learn More
+`src/lib/site.ts` の 2 つの値でサイト全体の「準備中」表示を制御している。
 
-To learn more about Next.js, take a look at the following resources:
+- `isPreparing: true` — 全ページ上部の準備中バナーと、サーバアドレス脇の「まだ接続できません」注記を表示。サーバ公開時に `false` にする。
+- `discordUrl: null` — Discord リンクを表示せず「Discord（準備中）」と表記。招待リンクが確定したら文字列を設定する。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## お知らせを追加する
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. `content/news/YYYY-MM-DD-slug.mdx` を作成する。
+2. frontmatter を記入する（`category` は `update` / `maintenance` / `event` / `notice`）。
 
-## Deploy on Vercel
+```mdx
+---
+title: タイトル
+date: "2026-08-22"
+category: update
+summary: 一覧とOGに表示される要約。
+draft: false
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+本文（Markdown / GFM）
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. PR を作成する。`draft: true` の記事は開発サーバでのみ表示される。
+
+## デプロイ
+
+未設定。Cloudflare Pages を想定（MVP は全ページ静的生成のため、静的出力でも配信可能）。
