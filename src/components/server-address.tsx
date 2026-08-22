@@ -26,7 +26,7 @@ export function ServerAddress({ size = "md" }: Props) {
       <div className="inline-flex items-center gap-2 rounded-lg border border-line bg-surface p-1.5">
         <code
           className={`px-2 font-mono tracking-wide text-magic ${
-            size === "lg" ? "text-lg sm:text-xl" : "text-sm sm:text-base"
+            size === "lg" ? "text-lg sm:text-xl" : "text-sm sm:text-[1rem]"
           }`}
         >
           {site.serverAddress}
