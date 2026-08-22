@@ -36,14 +36,18 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <a
-                href={site.discordUrl}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="text-muted hover:text-text"
-              >
-                Discord
-              </a>
+              {site.discordUrl ? (
+                <a
+                  href={site.discordUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="text-muted hover:text-text"
+                >
+                  Discord
+                </a>
+              ) : (
+                <span className="text-muted">Discord（準備中）</span>
+              )}
             </li>
           </ul>
         </div>

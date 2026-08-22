@@ -85,13 +85,20 @@ export default function TermsPage() {
           </p>
 
           <h2>10. お問い合わせ</h2>
-          <p>
-            本規約に関するお問い合わせは、
-            <a href={site.discordUrl} target="_blank" rel="noreferrer noopener">
-              Discord
-            </a>
-            のサポートチャンネルまでお願いします。
-          </p>
+          {site.discordUrl ? (
+            <p>
+              本規約に関するお問い合わせは、
+              <a href={site.discordUrl} target="_blank" rel="noreferrer noopener">
+                Discord
+              </a>
+              のサポートチャンネルまでお願いします。
+            </p>
+          ) : (
+            <p>
+              本規約に関するお問い合わせは、公式 Discord のサポートチャンネルまでお願いします。
+              Discord は現在準備中で、招待リンクは公開し次第ご案内します。
+            </p>
+          )}
         </Prose>
       </Section>
     </>

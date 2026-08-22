@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import { PreparingBanner } from "@/components/preparing-notice";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { site } from "@/lib/site";
@@ -43,6 +44,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           本文へスキップ
         </a>
         <SiteHeader />
+        <PreparingBanner />
         <main id="main" className="flex-1">
           {children}
         </main>

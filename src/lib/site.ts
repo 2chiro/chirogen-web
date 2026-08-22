@@ -1,4 +1,21 @@
-export const site = {
+type Site = {
+  name: string;
+  nameJa: string;
+  catchphrase: string;
+  description: string;
+  url: string;
+  serverAddress: string;
+  minecraftVersion: string;
+  edition: string;
+  /** ゲームサーバが一般公開されるまで true。公開時に false にする */
+  isPreparing: boolean;
+  /** 公式 Discord の招待リンク。未公開の間は null（リンクを表示しない） */
+  discordUrl: string | null;
+  serverListUrl: string;
+  locale: string;
+};
+
+export const site: Site = {
   name: "Chirogen",
   nameJa: "カイロゲン",
   catchphrase: "魔法と銃が融合した PvP サバイバル",
@@ -8,11 +25,11 @@ export const site = {
   serverAddress: "mc.chirogen.net",
   minecraftVersion: "26.1.2",
   edition: "Java Edition",
-  /** TODO: 公式 Discord の招待リンクが確定したら差し替える */
-  discordUrl: "https://discord.gg/",
+  isPreparing: true,
+  discordUrl: null,
   serverListUrl: "https://minecraft.jp/",
   locale: "ja_JP",
-} as const;
+};
 
 export const nav = [
   { href: "/join", label: "参加方法" },

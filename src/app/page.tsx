@@ -33,9 +33,11 @@ export default async function HomePage() {
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <ButtonLink href="/join">参加方法を見る</ButtonLink>
-            <ButtonLink href={site.discordUrl} variant="secondary" external>
-              Discord に参加
-            </ButtonLink>
+            {site.discordUrl && (
+              <ButtonLink href={site.discordUrl} variant="secondary" external>
+                Discord に参加
+              </ButtonLink>
+            )}
           </div>
 
           <div className="mt-8">

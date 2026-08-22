@@ -30,6 +30,13 @@ src/lib/site.ts       サーバアドレス・バージョン・Discord URL な�
 src/lib/news.ts       お知らせの読み込み（draft は本番ビルドで除外）
 ```
 
+## 公開状況の切り替え
+
+`src/lib/site.ts` の 2 つの値でサイト全体の「準備中」表示を制御している。
+
+- `isPreparing: true` — 全ページ上部の準備中バナーと、サーバアドレス脇の「まだ接続できません」注記を表示。サーバ公開時に `false` にする。
+- `discordUrl: null` — Discord リンクを表示せず「Discord（準備中）」と表記。招待リンクが確定したら文字列を設定する。
+
 ## お知らせを追加する
 
 1. `content/news/YYYY-MM-DD-slug.mdx` を作成する。

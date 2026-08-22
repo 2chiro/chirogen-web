@@ -34,14 +34,18 @@ export function SiteHeader() {
               </Link>
             );
           })}
-          <a
-            href={site.discordUrl}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="ml-2 rounded-md bg-arcane/20 px-3 py-2 text-sm font-medium text-arcane transition-colors hover:bg-arcane/30"
-          >
-            Discord
-          </a>
+          {site.discordUrl ? (
+            <a
+              href={site.discordUrl}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="ml-2 rounded-md bg-arcane/20 px-3 py-2 text-sm font-medium text-arcane transition-colors hover:bg-arcane/30"
+            >
+              Discord
+            </a>
+          ) : (
+            <span className="ml-2 rounded-md px-3 py-2 text-sm text-muted">Discord（準備中）</span>
+          )}
         </nav>
 
         <button
@@ -75,14 +79,20 @@ export function SiteHeader() {
               </li>
             ))}
             <li>
-              <a
-                href={site.discordUrl}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="block rounded-md px-2 py-3 text-sm text-arcane"
-              >
-                Discord
-              </a>
+              {site.discordUrl ? (
+                <a
+                  href={site.discordUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="block rounded-md px-2 py-3 text-sm text-arcane"
+                >
+                  Discord
+                </a>
+              ) : (
+                <span className="block rounded-md px-2 py-3 text-sm text-muted">
+                  Discord（準備中）
+                </span>
+              )}
             </li>
           </ul>
         </nav>

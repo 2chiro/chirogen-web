@@ -122,11 +122,15 @@ export default function RulesPage() {
             相手のプレイヤー名・状況（スクリーンショットがあれば添付）」を送ってください。
             自分で報復するのではなく、運営に任せてください。
           </p>
-          <p>
-            <a href={site.discordUrl} target="_blank" rel="noreferrer noopener">
-              Discord に参加する
-            </a>
-          </p>
+          {site.discordUrl ? (
+            <p>
+              <a href={site.discordUrl} target="_blank" rel="noreferrer noopener">
+                Discord に参加する
+              </a>
+            </p>
+          ) : (
+            <p>公式 Discord は準備中です。招待リンクは公開し次第ご案内します。</p>
+          )}
         </Prose>
       </Section>
     </>
