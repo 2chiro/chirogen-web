@@ -1,0 +1,16 @@
+{
+  // Cloudflare Workers（静的アセットのみ）へのデプロイ設定。
+  // `main` を持たないため Worker のコードは動かず、out/ の静的ファイルだけが配信される。
+  // このファイルが無いと Cloudflare 側のフレームワーク検出が OpenNext への移行を毎回実行する。
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "chirogen-web",
+  "compatibility_date": "2026-08-18",
+  "assets": {
+    "directory": "./out",
+    // 未知のパスは Next.js が出力する 404.html を返す
+    "not_found_handling": "404-page"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

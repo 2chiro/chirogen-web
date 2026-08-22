@@ -7,7 +7,8 @@
 
 ## 技術スタック
 
-- Next.js 16（App Router / Turbopack）+ TypeScript
+- Next.js 16（App Router / Turbopack）+ TypeScript。`output: "export"` で全ページを静的出力（`out/`）
+- Cloudflare Workers の静的アセット配信（`wrangler.jsonc`）
 - Tailwind CSS v4（`src/app/globals.css` の `@theme` に配色を定義）
 - MDX（`next-mdx-remote` + `gray-matter`）でお知らせを管理
 
@@ -17,8 +18,11 @@
 npm install
 npm run dev     # http://localhost:3000
 npm run lint
-npm run build
+npm run build     # out/ に静的出力
+npm run preview   # wrangler dev で out/ を配信（本番と同じ静的配信を確認する）
 ```
+
+`output: "export"` のため `next start` は使えない。ビルド結果の確認は `npm run preview`。
 
 ## ディレクトリ
 
@@ -58,4 +62,18 @@ draft: false
 
 ## デプロイ
 
-未設定。Cloudflare Pages を想定（MVP は全ページ静的生成のため、静的出力でも配信可能）。
+Cloudflare Workers に静的アセットのみをデプロイする（`wrangler.jsonc` の `assets.directory: ./out`）。
+`main` を持たない設定なので Worker のコードは動かず、配信されるのは `out/` の静的ファイルだけ。
+
+- Cloudflare 側の Build command: `npm run build`
+- Deploy command: `npx wrangler deploy`
+- 手元からデプロイする場合は `npm run deploy`
+
+サーバランタイム（`@opennextjs/cloudflare`）は使わない。全ルートがビルド時に生成できるため不要で、
+Cloudflare のフレームワーク自動検出に任せると OpenNext への移行がビルドごとに実行され、
+ランタイム依存（MDX 系パッケージ）のバンドルに失敗して全ページが Internal Server Error になる。
+`wrangler.jsonc` をコミットしておくことでこの自動移行を止めている。
+
+新しいルートを追加するときは、ビルド時に静的化できること（`generateStaticParams` / `dynamicParams = false`）を確認する。
+`robots.ts` / `sitemap.ts` / `opengraph-image.tsx` のような Route Handler 相当のファイルは
+`export const dynamic = "force-static"` が必要。
