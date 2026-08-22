@@ -15,7 +15,6 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <span className="text-lg font-bold tracking-widest text-magic">{site.name}</span>
-          <span className="hidden text-xs text-muted sm:inline">{site.nameJa}</span>
         </Link>
 
         <nav aria-label="メインナビゲーション" className="hidden items-center gap-1 md:flex">

@@ -1,6 +1,5 @@
 type Site = {
   name: string;
-  nameJa: string;
   catchphrase: string;
   description: string;
   url: string;
@@ -17,10 +16,9 @@ type Site = {
 
 export const site: Site = {
   name: "Chirogen",
-  nameJa: "カイロゲン",
   catchphrase: "魔法と銃が融合した PvP サバイバル",
   description:
-    "Chirogen（カイロゲン）は、ジョブ・スキル育成と独自経済、PvP・PK懸賞、カジノを備えた日本語の Minecraft Java Edition サバイバルサーバです。",
+    "Chirogen は、ジョブ・スキル育成と独自経済、PvP・PK懸賞、カジノを備えた日本語の Minecraft Java Edition サバイバルサーバです。",
   url: "https://www.chirogen.net",
   serverAddress: "mc.chirogen.net",
   minecraftVersion: "26.1.2",
