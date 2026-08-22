@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { getNewsList } from "@/lib/news";
 import { site } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths = ["", "/join", "/features", "/rules", "/news", "/legal/terms", "/legal/privacy"];
   const posts = await getNewsList();
